@@ -1,44 +1,30 @@
-import { GitHubIssuePayload, GitHubStarPayload } from '../../interfaces';
-
-
+import { GitHubIssuePayload, GitHubStarPayload } from "../../interfaces";
 
 export class GitHubService {
+  constructor() {}
 
-  constructor() { }
-
-
-  onStar( payload: GitHubStarPayload ): string {
-
-
+  // Captuamos las acciones en el 'Start de github(la estrellita)'
+  onStar(payload: GitHubStarPayload): string {
     const { action, sender, repository } = payload;
 
-    return `User ${ sender.login } ${ action } star on ${ repository.full_name }`;
-
+    return `User ${sender.login} ${action} star on ${repository.full_name}`;
   }
 
-  onIssue( payload: GitHubIssuePayload ): string {
-
+  onIssue(payload: GitHubIssuePayload): string {
     const { action, issue } = payload;
 
-    if ( action === 'opened' ) {
-      return `An issue was opened with this title ${ issue.title }`;
+    if (action === "opened") {
+      return `An issue was opened with this title ${issue.title}`;
     }
 
-    if ( action === 'closed' ) {
-      return `An issue was closed by ${ issue.user.login }`;
+    if (action === "closed") {
+      return `An issue was closed by ${issue.user.login}`;
     }
 
-    if ( action === 'reopened' ) {
-      return `An issue was reopened by ${ issue.user.login }`;
+    if (action === "reopened") {
+      return `An issue was reopened by ${issue.user.login}`;
     }
 
-
-    return `Unhandled action for the issue event ${ action }`;
-
-
+    return `Unhandled action for the issue event ${action}`;
   }
-
-
-
-
 }
